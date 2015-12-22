@@ -3,7 +3,7 @@ FROM babim/centos7base
 MAINTAINER "Duc Anh Babim" <ducanh.babim@yahoo.com>
 
 # Install required repos, update, and then install PHP-FPM
-RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-1.noarch.rpm && \ 
+RUN yum install epel-release -y && \
     rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm && \
     yum update -y && \
     yum install --enablerepo=remi -y \
