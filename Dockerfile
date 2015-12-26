@@ -54,7 +54,7 @@ ENV TZ Asia/Ho_Chi_Minh
 RUN mkdir -p /var/www/
 VOLUME ["/var/www/"]
 
-RUN echo "/usr/sbin/php5-fpm -F" > /startup.sh && echo "/usr/sbin/sshd -D" >> /startup.sh && chmod +x /startup.sh
+RUN echo "service ssh start" > /startup.sh && echo "/usr/sbin/php5-fpm -F" >> /startup.sh && chmod +x /startup.sh
 CMD ["/startup.sh"]
 
 EXPOSE 9000 22
