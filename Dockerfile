@@ -1,7 +1,5 @@
 FROM babim/debianbase
 
-MAINTAINER "Duc Anh Babim" <ducanh.babim@yahoo.com>
-
 RUN apt-get update && apt-get install -y \
     php5-fpm \
     php5-curl \
@@ -51,8 +49,6 @@ VOLUME ["/var/www"]
 WORKDIR /etc/php5/fpm
 
 ENV PHP_FPM_USER=www-data
-ENV LC_ALL C.UTF-8
-ENV TZ Asia/Ho_Chi_Minh
 
 ENTRYPOINT ["/usr/sbin/php5-fpm", "-F"]
 
