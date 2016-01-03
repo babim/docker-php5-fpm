@@ -1,7 +1,5 @@
 FROM babim/centos7base
 
-MAINTAINER "Duc Anh Babim" <ducanh.babim@yahoo.com>
-
 # Install required repos, update, and then install PHP-FPM
 RUN yum install epel-release -y && \
     rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm && \
@@ -41,9 +39,6 @@ RUN sed -ri 's/^display_errors\s*=\s*Off/display_errors = On/g' /etc/php.ini && 
 
 RUN mkdir -p /var/www
 VOLUME ["/var/www"]
-
-ENV LC_ALL en_US.UTF-8
-ENV TZ Asia/Ho_Chi_Minh
 
 # Run PHP-FPM on container start.
 ENTRYPOINT ["/usr/sbin/php-fpm", "-F"]
