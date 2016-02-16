@@ -51,9 +51,13 @@ WORKDIR /etc/php5/fpm
 ENV PHP_FPM_USER=www-data
 
 RUN mkdir -p /var/www/
-VOLUME ["/var/www/"]
+VOLUME ["/var/www", "/etc/php5"]
 
-RUN echo "service ssh start" > /startup.sh && echo "/usr/sbin/php5-fpm -F" >> /startup.sh && chmod +x /startup.sh
-CMD ["/startup.sh"]
+RUN mkdir -p /etc-start/php50 \
+	&& cp -R /etc/php5 /etc-start/php5
+
+COPY docker-entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 9000 22
