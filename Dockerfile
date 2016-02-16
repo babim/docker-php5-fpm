@@ -46,13 +46,18 @@ RUN apt-get clean && \
     rm -f /etc/dpkg/dpkg.cfg.d/02apt-speedup
 
 RUN mkdir -p /var/www
-VOLUME ["/var/www"]
+VOLUME ["/var/www", "/etc/php5"]
+
+RUN mkdir -p /etc-start/php50 \
+	&& cp -R /etc/php5 /etc-start/php5
+
+COPY docker-entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
 # Define working directory.
 WORKDIR /etc/php5/fpm
 
 ENV PHP_FPM_USER=www-data
-
-ENTRYPOINT ["/usr/sbin/php5-fpm", "-F"]
 
 EXPOSE 9000
