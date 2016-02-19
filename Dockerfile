@@ -48,8 +48,8 @@ RUN apt-get clean && \
 RUN mkdir -p /var/www
 VOLUME ["/var/www", "/etc/php5"]
 
-RUN mkdir -p /etc-start/php50 \
-	&& cp -R /etc/php5 /etc-start/php5
+RUN mkdir -p /etc-start/php5 \
+	&& cp -R /etc/php5/* /etc-start/php5
 
 COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
