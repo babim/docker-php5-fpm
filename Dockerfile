@@ -21,7 +21,8 @@ RUN apt-get update && apt-get install -y \
     php5-xdebug \
     php5-xmlrpc \
     php5-xcache \
-    php5-tidy
+    php5-tidy \
+    imagemagick
 
 RUN sed -ri 's/^display_errors\s*=\s*Off/display_errors = On/g' /etc/php5/fpm/php.ini && \
     sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ Asia\/Ho_Chi_Minh/g' /etc/php5/fpm/php.ini && \
