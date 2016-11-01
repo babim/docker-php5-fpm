@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y \
     php5-xmlrpc \
     php5-xcache \
     php5-tidy \
+    php5.6-zip \
     imagemagick
 
 RUN sed -ri 's/^display_errors\s*=\s*Off/display_errors = On/g' /etc/php5/fpm/php.ini && \
