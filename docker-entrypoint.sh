@@ -1,53 +1,24 @@
-#!/bin/bash
+#!/bin/sh
 if [ -z "`ls /etc/php5`" ] 
 then
 	cp -R /etc-start/php5/* /etc/php5
 fi
 
-# SSH
-if [ "${AUTHORIZED_KEYS}" != "**None**" ]; then
-    echo "=> Found authorized keys"
-    mkdir -p /root/.ssh
-    chmod 700 /root/.ssh
-    touch /root/.ssh/authorized_keys
-    chmod 600 /root/.ssh/authorized_keys
-    IFS=$'\n'
-    arr=$(echo ${AUTHORIZED_KEYS} | tr "," "\n")
-    for x in $arr
-    do
-        x=$(echo $x |sed -e 's/^ *//' -e 's/ *$//')
-        cat /root/.ssh/authorized_keys | grep "$x" >/dev/null 2>&1
-        if [ $? -ne 0 ]; then
-            echo "=> Adding public key to /root/.ssh/authorized_keys: $x"
-            echo "$x" >> /root/.ssh/authorized_keys
-        fi
-    done
-fi
-
-# SSH
-if [ "${AUTHORIZED_KEYS}" != "**None**" ]; then
-    echo "=> Found authorized keys"
-    mkdir -p /root/.ssh
-    chmod 700 /root/.ssh
-    touch /root/.ssh/authorized_keys
-    chmod 600 /root/.ssh/authorized_keys
-    IFS=$'\n'
-    arr=$(echo ${AUTHORIZED_KEYS} | tr "," "\n")
-    for x in $arr
-    do
-        x=$(echo $x |sed -e 's/^ *//' -e 's/ *$//')
-        cat /root/.ssh/authorized_keys | grep "$x" >/dev/null 2>&1
-        if [ $? -ne 0 ]; then
-            echo "=> Adding public key to /root/.ssh/authorized_keys: $x"
-            echo "$x" >> /root/.ssh/authorized_keys
-        fi
-    done
-fi
-
-# set password root is root
-SSHPASS1=${SSHPASS:-root}
-echo "root:$SSHPASS1" | chpasswd
-service ssh start
-
-
-/usr/sbin/php5-fpm -F
+   # Set environments
+    TIMEZONE1=${TIMEZONE:-Asia/Ho_Chi_Minh}
+    PHP_MEMORY_LIMIT1=${PHP_MEMORY_LIMIT:-512M}
+    MAX_UPLOAD1=${MAX_UPLOAD:-520M}
+    PHP_MAX_FILE_UPLOAD1=${PHP_MAX_FILE_UPLOAD:-200}
+    PHP_MAX_POST1=${PHP_MAX_POST:-520M}
+    MAX_INPUT_TIME1=${MAX_INPUT_TIME:-3600}
+    MAX_EXECUTION_TIME1=${MAX_EXECUTION_TIME:-3600}
+	
+	sed -i "s|;*date.timezone =.*|date.timezone = ${TIMEZONE}|i" /etc/php5/php.ini && \
+	sed -i "s|;*memory_limit =.*|memory_limit = ${PHP_MEMORY_LIMIT}|i" /etc/php5/php.ini && \
+ 	sed -i "s|;*upload_max_filesize =.*|upload_max_filesize = ${MAX_UPLOAD}|i" /etc/php5/php.ini && \
+    	sed -i "s|;*max_file_uploads =.*|max_file_uploads = ${PHP_MAX_FILE_UPLOAD}|i" /etc/php5/php.ini && \
+    	sed -i "s|;*post_max_size =.*|post_max_size = ${PHP_MAX_POST}|i" /etc/php5/php.ini && \
+    	sed -i "s/max_input_time = 60/max_input_time = 3600/" /etc/php5/php.ini && \
+	sed -i "s/max_execution_time = 30/max_execution_time = 3600/" /etc/php5/php.ini
+	
+/usr/bin/php-fpm -F
