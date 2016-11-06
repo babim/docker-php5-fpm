@@ -54,8 +54,8 @@ ENV PHP_FPM_USER=www-data
 RUN mkdir -p /var/www/
 VOLUME ["/var/www", "/etc/php5"]
 
-RUN mkdir -p /etc-start/ \
-	&& mv /etc/php5 /etc-start/ && mkdir /etc/php5
+RUN mkdir -p /etc-start/php5 \
+	&& cp -R /etc/php5/* /etc-start/php5
 
 COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
