@@ -26,5 +26,6 @@ RUN mkdir -p /etc-start/php5 \
 COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/usr/sbin/php-fpm", "-F"]
 
 EXPOSE 9000
