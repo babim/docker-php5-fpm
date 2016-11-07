@@ -20,5 +20,4 @@ fi
     	sed -i "s|;*post_max_size =.*|post_max_size = ${PHP_MAX_POST}|i" /etc/php5/php.ini && \
     	sed -i "s/max_input_time = 60/max_input_time = 3600/" /etc/php5/php.ini && \
 	sed -i "s/max_execution_time = 30/max_execution_time = 3600/" /etc/php5/php.ini
-	
-/usr/bin/php-fpm -F
+
