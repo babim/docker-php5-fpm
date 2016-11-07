@@ -55,6 +55,7 @@ RUN mkdir -p /etc-start/php5 \
 COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/usr/sbin/php5-fpm", "-F"]
 
 # Define working directory.
 WORKDIR /etc/php5/fpm
