@@ -22,8 +22,8 @@ fi
 	sed -i "s/max_execution_time = 30/max_execution_time = 3600/" /etc/php5/php.ini
 
     sed -i "s/;opcache.enable=0/opcache.enable=0/" /etc/php5/php.ini && \
-    sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/php-fpm.conf && \
-    sed -i '/^listen = /clisten = 9000' /etc/php5/php-fpm.d/www.conf && \
+    sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm.conf && \
+    sed -i '/^listen = /clisten = 9000' /etc/php5/fpm.d/www.conf && \
     sed -i '/^listen.allowed_clients/c;listen.allowed_clients =' /etc/php5/fpm.d/www.conf && \
     sed -i '/^;catch_workers_output/ccatch_workers_output = yes' /etc/php5/fpm.d/www.conf && \
     sed -i '/^;env\[TEMP\] = .*/aenv[DB_PORT_3306_TCP_ADDR] = $DB_PORT_3306_TCP_ADDR' /etc/php5/fpm.d/www.conf
