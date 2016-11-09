@@ -9,8 +9,12 @@ RUN apt-get update && \
     php-apcu php-apcu-bc php-imagick php5.6-mbstring imagemagick php5.6-sqlite3 php5.6-sybase php5.6-bcmath \
     php-geoip php-mongodb php-oauth php-redis php-smbclient php-uploadprogress php5.6-phpdbg php5.6-snmp  \
     php5.6-opcache php-xdebug php-memcached php5.6-bz2 php5.6-odbc php5.6-interbase php5.6-gmp php5.6-xsl php-gmagick \
-    php5.6-soap php5.6-xml
-    
+    php5.6-soap php5.6-xml && \
+    apt-get purge -y apache* && apt-get autoremove --purge -y
+
+# Fix run suck
+RUN mkdir -p /run/php/
+
 RUN apt-get clean && \
     apt-get autoclean && \
     apt-get autoremove -y && \
