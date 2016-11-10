@@ -24,10 +24,10 @@ RUN apt-get clean && \
     rm -f /etc/dpkg/dpkg.cfg.d/02apt-speedup
 
 RUN mkdir -p /var/www
-VOLUME ["/var/www", "/etc/php/5.6"]
+VOLUME ["/var/www", "/etc/php"]
 
-RUN mkdir -p /etc-start/php/5.6 \
-	&& cp -R /etc/php/5.6/* /etc-start/php/5.6
+RUN mkdir -p /etc-start/php \
+	&& cp -R /etc/php/* /etc-start/php
 
 COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
