@@ -6,11 +6,14 @@ RUN apt-get update && \
     apt-get install -y --force-yes php5.6-fpm telnet inetutils-ping \
     php5.6-json php5.6-gd php5.6-sqlite curl php5.6-curl php-xml-parser php5.6-ldap \
     php5.6-mysql php5.6-pgsql php5.6-imap php5.6-tidy php5.6-xmlrpc php5.6-zip php5.6-mcrypt php5.6-memcache php5.6-intl \
-    php-imagick php5.6-mbstring imagemagick php5.6-sqlite3 php5.6-sybase php5.6-bcmath php5.6-memcached memcached \
+    php-imagick php5.6-mbstring php5.6-sqlite3 php5.6-sybase php5.6-bcmath php5.6-memcached memcached \
     php-mongodb php-redis php-smbclient php-uploadprogress php5.6-phpdbg \
     php5.6-opcache php-xdebug php5.6-bz2 php5.6-odbc php5.6-interbase php5.6-gmp php5.6-xsl \
     php5.6-soap php5.6-xml && \
     apt-get purge -y apache* && apt-get autoremove --purge -y
+
+# install option for webapp (owncloud)
+RUN apt-get install -y --force-yes imagemagick smbclient ffmpeg ghostscript openexr openexr openexr libxml2 gamin
 
 # Fix run suck
 RUN mkdir -p /run/php/
