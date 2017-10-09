@@ -16,6 +16,24 @@ RUN apt-get install -y --force-yes imagemagick smbclient ffmpeg ghostscript open
 # Fix run suck
 RUN mkdir -p /run/php/
 
+# install oracle client extension
+ENV ORACLE_VERSION 12.2.0.1.0
+RUN apt-get install -y --force-yes wget unzip libaio-dev php5.6-dev php-pear
+RUN wget http://media.matmagoc.com/oracle/instantclient-basic-linux.x64-$ORACLE_VERSION.zip && \
+    wget http://media.matmagoc.com/oracle/instantclient-sdk-linux.x64-$ORACLE_VERSION.zip && \
+    wget http://media.matmagoc.com/oracle/instantclient-sqlplus-linux.x64-$ORACLE_VERSION.zip && \
+    unzip instantclient-basic-linux.x64-$ORACLE_VERSION.zip -d /usr/local/ && \
+    unzip instantclient-sdk-linux.x64-$ORACLE_VERSION.zip -d /usr/local/ && \
+    unzip instantclient-sqlplus-linux.x64-$ORACLE_VERSION.zip -d /usr/local/ && \
+    ln -s /usr/local/instantclient_12_2 /usr/local/instantclient && \
+    ln -s /usr/local/instantclient/libclntsh.so.12.1 /usr/local/instantclient/libclntsh.so && \
+    ln -s /usr/local/instantclient/sqlplus /usr/bin/sqlplus && \
+    echo 'instantclient,/usr/local/instantclient' | pecl install oci8-2.0.12 && \
+    echo "extension=oci8.so" > /etc/php/5.6/apache2/conf.d/30-oci8.ini && \
+    echo "extension=oci8.so" > /etc/php/5.6/cli/conf.d/30-oci8.ini && \
+    rm -f instantclient-basic-linux.x64-$ORACLE_VERSION.zip instantclient-sdk-linux.x64-$ORACLE_VERSION.zip instantclient-sqlplus-linux.x64-$ORACLE_VERSION.zip
+
+#clean
 RUN apt-get clean && \
     apt-get autoclean && \
     apt-get autoremove -y && \
