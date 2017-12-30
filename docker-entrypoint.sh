@@ -20,6 +20,8 @@ if [ -z "`ls /etc/php`" ]; then
     	-e "s|;*post_max_size =.*|post_max_size = ${PHP_MAX_POST1}|i" \
     	-e "s/max_input_time = 60/max_input_time = ${MAX_INPUT_TIME1}/" \
 	-e "s/max_execution_time = 30/max_execution_time = ${MAX_EXECUTION_TIME1}/" \
+	-e "s/error_reporting = .*/error_reporting = E_ALL/" \
+	-e "s/display_errors = .*/display_errors = On/" \
 	/etc/php/5.6/*/php.ini
 	
     sed -i '/^listen = /clisten = 9000' /etc/php/5.6/fpm/pool.d/www.conf && \
