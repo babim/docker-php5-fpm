@@ -21,6 +21,8 @@ then
     	-e "s/max_input_time = 60/max_input_time = ${MAX_INPUT_TIME1}/" \
 	-e "s/max_execution_time = 30/max_execution_time = ${MAX_EXECUTION_TIME1}/" \
 	-e "s/;opcache.enable=0/opcache.enable=0/" \
+	-e "s/error_reporting = .*/error_reporting = E_ALL/" \
+	-e "s/display_errors = .*/display_errors = On/" \
 	/etc/php5/php.ini
 
     sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/php-fpm.conf
