@@ -73,5 +73,4 @@ if [ -f "/runcron.sh" ]; then /runcron.sh; fi
 # nfs
 if [ -f "/mountnfs.sh" ]; then /mountnfs.sh; fi
 
-php-fpm5.6 -F
-#exec "$@"
+exec "$@"
