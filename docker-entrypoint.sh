@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+export TERM=xterm
 if [ -z "`ls /etc/php`" ]; then 
 	cp -R /etc-start/php/* /etc/php
 
@@ -73,4 +73,4 @@ if [ -f "/runcron.sh" ]; then /runcron.sh; fi
 # nfs
 if [ -f "/mountnfs.sh" ]; then /mountnfs.sh; fi
 
-exec "$@"
+php-fpm5.6 -F
