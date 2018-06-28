@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash
 if [ -z "`ls /etc/php5`" ] 
 then
 	cp -R /etc-start/php5/* /etc/php5
@@ -68,11 +68,7 @@ fi
 
 fi
 
-# ssh
-if [ -f "/runssh.sh" ]; then /runssh.sh; fi
-# cron
-if [ -f "/runcron.sh" ]; then /runcron.sh; fi
-# nfs
-if [ -f "/mountnfs.sh" ]; then /mountnfs.sh; fi
+# option
+if [ -f "/option.sh" ]; then /option.sh; fi
 
 exec "$@"
