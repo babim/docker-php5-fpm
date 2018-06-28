@@ -66,11 +66,7 @@ fi
 
 fi
 
-# ssh
-if [ -f "/runssh.sh" ]; then /runssh.sh; fi
-# cron
-if [ -f "/runcron.sh" ]; then /runcron.sh; fi
-# nfs
-if [ -f "/mountnfs.sh" ]; then /mountnfs.sh; fi
+# option
+if [ -f "/option.sh" ]; then /option.sh; fi
 
 php-fpm5.6 -F
