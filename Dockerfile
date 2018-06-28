@@ -1,5 +1,9 @@
 FROM babim/centos7base
 
+# Download option
+RUN yum install -y wget bash && cd / && wget --no-check-certificate https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20SCRIPT%20AUTO/option.sh && \
+    chmod 755 /option.sh && yum remove -y wget
+
 # Install required repos, update, and then install PHP-FPM
 RUN yum install epel-release -y && \
     rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm && \
@@ -40,8 +44,11 @@ RUN sed -ri 's/^display_errors\s*=\s*Off/display_errors = On/g' /etc/php.ini && 
 RUN mkdir -p /var/www
 VOLUME ["/var/www"]
 
-# Run PHP-FPM on container start.
-ENTRYPOINT ["/usr/sbin/php-fpm", "-F"]
+# Run PHP-FPM on container start
+ADD start.sh /start.sh
+RUN chmod +x /start.sh
+ENTRYPOINT ["/start.sh"].
+CMD ["/usr/sbin/php-fpm", "-F"]
 
 # PORTS
 # Port 9000 is how Nginx will communicate with PHP-FPM.
