@@ -57,11 +57,7 @@ RUN mkdir -p /etc-start/php \
 COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-#CMD ["/entrypoint.sh"]
-#CMD ["php-fpm5.6", "-F"]
-
-# Define working directory.
-WORKDIR /etc/php/5.6/fpm
+CMD ["php-fpm5.6", "-F"]
 
 ENV PHP_FPM_USER=www-data
 

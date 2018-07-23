@@ -1,5 +1,6 @@
-#!/bin/bash
+#!/bin/bash -e
 export TERM=xterm
+
 if [ -z "`ls /etc/php`" ]; then 
 	cp -R /etc-start/php/* /etc/php
 
@@ -69,4 +70,4 @@ fi
 # option
 if [ -f "/option.sh" ]; then /option.sh; fi
 
-php-fpm5.6 -F
+exec "$@"
